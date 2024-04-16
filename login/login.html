@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        #container {
+            width: 250px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+            background-color: yellowgreen;
+        }
+        input{
+            margin-top: 20px;
+            padding: 5px;
+        }
+        button{
+            width: 150px;
+            height: 40px;
+            font-size: large;
+            background-color: rgb(72, 234, 234);
+            border-radius: 10px;
+            border: none;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div class="container">
+            <h2>Login</h2>
+            <form id="loginForm">
+                <input type="email" id="name" placeholder="Email" required><br>
+                <input type="password" id="password" placeholder="Password" required><br>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+</body>
+<script>
+    document.getElementById("loginForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        
+        const name = document.getElementById("name").value;
+        const password = document.getElementById("password").value;
+    
+        const user = JSON.parse(localStorage.getItem("user"));
+    
+        if (user && user.Name === name && user.Password === password) {
+
+            if (user.Role === "HR") {
+                window.location.href = '/employee_records/records/hr.html' 
+            } else {
+                window.location.href = '/employee_records/records/employe.html' 
+            }
+        } else {
+            alert("Invalid credentials. Please try again.");
+        }
+    });
+</script>
+</html>

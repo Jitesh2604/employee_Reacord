@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employe Records</title>
+    <style>
+        #container {
+            /* border: 1px solid red; */
+            width: 60%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+            text-align: center;
+            font-style: normal;
+            margin: auto;
+            color: lightgrey;
+            background-color:cornflowerblue;
+        }
+        button{
+            width: 120px;
+            height: 40px;
+            font-weight: bold;
+            font-size: large;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: none;
+            background-color: greenyellow;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h2>Welcome to Employee managemnt <br> Systum</h2>
+        <button id="signup">Signup</button>
+        <button id="login">Login</button>
+    </div>
+</body>
+<script>
+    document.getElementById('signup').addEventListener('click', signupFunc);
+    document.getElementById('login').addEventListener('click', loginFunc);
+
+    function signupFunc(){
+        window.location.href = '/employee_records/signup/signup.html';
+    };
+
+    function loginFunc(){
+        window.location.href = '/employee_records/login/login.html';
+    };
+
+</script>
+</html>

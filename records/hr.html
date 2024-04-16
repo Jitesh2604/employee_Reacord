@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Records</title>
+    <style>
+        #container{
+            /* border: 1px solid red; */
+            border-radius: 10px;
+            box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+            text-align: center;
+            font-style: normal;
+            margin: auto;
+            color: lightgrey;
+            background-color:cornflowerblue;
+            padding: 20px;
+        }
+        table{
+            border: 1px solid black;
+            margin: auto;
+            background-color: green;
+            color: black;
+        }
+        tr,th,td{
+            padding: 5px;
+            border: 1px solid black;
+            width: 100px;
+        }
+        input{
+            margin-top: 20px;
+            padding: 5px;
+        }
+        button{
+            width: 150px;
+            height: 40px;
+            font-size: large;
+            background-color: rgb(72, 234, 234);
+            border-radius: 10px;
+            border: none;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h2>HR Records</h2>
+        <form id="addEmployeeForm">
+            <input type="text" id="employeeName" placeholder="Employee Name" required>
+            <select id="employeeRole" required>
+                <option value="">Select Role</option>
+                <option value="Employee">Employee</option>
+                <option value="HR">HR</option>
+            </select>
+            <button type="submit">Add Employee</button>
+        </form>
+        <hr>
+        <h3>All Employees</h3>
+        <table id="employeeTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Role</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</body>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        let employees = [];
+
+        function getDataFromLocalStorage() {
+            const storedEmployees = localStorage.getItem("employees");
+            if (storedEmployees) {
+                employees = JSON.parse(storedEmployees);
+            }
+        }
+
+        function saveEmployeesToLocalStorage() {
+            localStorage.setItem("employees", JSON.stringify(employees));
+        }
+
+        function EmployeeTable() {
+            tbody.innerHTML = "";
+            employees.forEach(function(employee) {
+                const row = document.createElement("tr");
+                const nameCell = document.createElement("td");
+                nameCell.textContent = employee.name;
+                const roleCell = document.createElement("td");
+                roleCell.textContent = employee.role;
+                row.appendChild(nameCell);
+                row.appendChild(roleCell);
+                tbody.appendChild(row);
+            });
+        }
+
+        function addEmployee(name, role) {
+            employees.push({ name: name, role: role });
+            EmployeeTable();
+            saveEmployeesToLocalStorage();
+        }
+
+        document.getElementById('addEmployeeForm').addEventListener("submit", function(event) {
+            event.preventDefault();
+            const name = employeeNameInput.value;
+            const role = employeeRoleInput.value;
+            if (name && role) {
+                addEmployee(name, role);
+                employeeNameInput.value = "";
+                employeeRoleInput.value = "";
+            } else {
+                alert("Please fill out all fields.");
+            }
+        });
+
+        const tbody = document.querySelector("#employeeTable tbody");
+        const addEmployeeForm = document.getElementById("addEmployeeForm");
+        const employeeNameInput = document.getElementById("employeeName");
+        const employeeRoleInput = document.getElementById("employeeRole");
+
+        getDataFromLocalStorage();
+
+        EmployeeTable();
+    });
+</script>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Page</title>
+    <style>
+        #container {
+            width: 250px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+            background-color: yellowgreen;
+        }
+        input{
+            margin-top: 20px;
+            margin-bottom: 20px;
+            padding: 5px;
+        }
+        select{
+            width: 120px;
+        }
+        button{
+            width: 150px;
+            height: 40px;
+            font-size: large;
+            background-color: rgb(72, 234, 234);
+            border-radius: 10px;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Signup</h1>
+        <form id="signform">
+            <label>Email:</label>
+            <input type="email" id="name" placeholder="Enter Your Email">
+            <br>
+            <label>Select Role:</label>
+            <select id="role" required>
+                <option value=""> Role</option>
+                <option value="employe">Employe</option>
+                <option value="HR">HR</option>
+            </select>
+            <br>
+            <label>Password:</label>
+            <input type="password" id="pass" placeholder="Enter Password Here" >
+            <button type="submit">Sign Up</button>
+        </form>
+        
+    </div>
+</body>
+<script>
+    document.getElementById('signform').addEventListener('submit', myFunction);
+
+    function myFunction(event){
+        event.preventDefault();
+
+        let name = document.getElementById('name').value;
+        let role = document.getElementById('role').value;
+        let pass = document.getElementById('pass').value;
+
+        let obj = {
+            Name: name,
+            Role: role,
+            Password: pass
+        };
+        console.log(obj);
+
+        localStorage.setItem('user', JSON.stringify(obj));
+
+        window.location.href = '/employee_records/login/login.html' 
+    }
+</script>
+</html>
